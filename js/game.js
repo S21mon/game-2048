@@ -3,9 +3,17 @@ export default class Game {
         this.isActive = false;
     }
 
+    get isActive(){
+        return this._isActive;
+    }
+
+    set isActive(state) {
+        this._isActive = state;
+    }
+
     startGame() {
         console.log('game started');
-        this.isActive = !this.isActive;
+        this._isActive = !this.isActive;
     }
 
     finishGame() {

@@ -1,20 +1,11 @@
 import Table from './table.js';
 import Game from './game.js';
 import CONFIG from './config.js';
+import EventsHandler from './eventsHandler.js';
 
 const startGameButton = document.querySelector('[data-functionality="start-game"]');
-
-startGameButton.addEventListener('click', function(event) {
-   if (game.isActive) {
-      game.finishGame();
-   }
-   game.startGame();
-});
-
-window.addEventListener('load', function(event) {
-   table.initTable();
-})
-
 const game = new Game();
+const table = new Table(CONFIG.ROWS_TABLE_QTY, CONFIG.COLUMNS_TABLE_QTY);
 
-const table = new Table(CONFIG.ROW_TABLE_QTY, CONFIG.COLUMN_TABLE_QTY, 'FDSFSFD');
+EventsHandler.addHandler(startGameButton, 'click', game.startGame);
+EventsHandler.addHandler(window, 'load', table.initTable.bind(table));

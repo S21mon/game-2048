@@ -8,5 +8,9 @@
                   $brown-color);
 
     border: 3px solid $dark-amber-color;
+
+    @include media-query(phone-md) {
+      font-size: $cell-font-size-sm;
+    }
   }
 }
