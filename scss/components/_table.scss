@@ -1,0 +1,12 @@
+.game-table {
+  border-collapse: collapse;
+
+  &__cell {
+    @include text($cell-font-size,
+                  $cell-font-weight,
+                  $cell-line-height,
+                  $brown-color);
+
+    border: 3px solid $dark-amber-color;
+  }
+}

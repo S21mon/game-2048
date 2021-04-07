@@ -1,0 +1,34 @@
+body {
+  font-family: $font-family;
+}
+
+.title {
+  font-weight: $title-font-weight;
+  line-height: $title-line-height;
+
+  color: $brown-color;
+
+  &_size_lg {
+    font-size: $title-font-size-lg;
+  }
+
+  &_size_md {
+    font-size: $title-font-size-md;
+  }
+
+  &_size-sm {
+    font-size: $title-font-size-sm;
+  }
+}
+
+.paragraph {
+  @include text($paragraph-font-size,
+                $paragraph-font-weight,
+                $paragraph-line-height);
+}
+
+.mark {
+  @include text($mark-font-size,
+          $mark-font-weight,
+          $mark-line-height);
+}

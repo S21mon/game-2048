@@ -1,0 +1,12 @@
+.best-result {
+  padding: 10px;
+  border: 1.5px solid $copper-color;
+
+  &__description {
+    margin-bottom: 10px;
+  }
+
+  &__value {
+    font-size: 20px;
+  }
+}

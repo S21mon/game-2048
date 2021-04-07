@@ -1,0 +1,45 @@
+.main {
+  &__container {
+    width: 600px;
+
+    @include media-query(phone-lg) {
+      width: 100%;
+    }
+  }
+}
+
+.section-game {
+  padding-top: 20px;
+  padding-bottom: 50px;
+
+  &__game-table {
+    margin: 0 auto 20px;
+  }
+
+  &__game-table-cell {
+    padding: 40px;
+
+    @include media-query(phone-md) {
+      padding: 30px;
+    }
+
+    @include media-query(phone-sm) {
+      padding: 20px;
+    }
+  }
+
+  &__btn {
+    margin: 0 auto;
+  }
+
+  @include media-query(phone-lg) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  @include media-query(phone-md) {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 30px;
+  }
+}
