@@ -1,10 +1,11 @@
 import EventsHandler from './eventsHandler.js';
 import CONFIG from './config.js';
-import GeneratorValues from './generatorValues.js';
+import Numbers from './numbers.js';
+import TableRender from './tableRender.js';
 
 export default class Table {
     constructor(rowsQty, columnsQty) {
-        this.generatorValues = new GeneratorValues();
+        this.generatorValues = new Numbers();
         this.cellsValues = new Map();
         this.rowsQty = rowsQty;
         this.columnsQty = columnsQty;
@@ -46,10 +47,9 @@ export default class Table {
         this.table = this._createTable();
         this.cells = this.table.querySelectorAll('td');
 
-        this._setValueInCells(this.generatorValues.generateValue(this.cellsValues));
-        this._displayNumbers();
-
-        EventsHandler.addHandler(this.table, 'keydown', this._changeTable);
+        const startedValues = this.generatorValues.generateNumbersForCell(this.cellsValues);
+        this._setValueInCells(startedValues);
+        this.cells = TableRender.displayTableNumbers(this.cells, this.cellsValues);
     }
 
     _createTable() {
@@ -78,6 +78,8 @@ export default class Table {
     }
 
     _setValueInCells(numbers) {
+        if (this.cellsValues.size === this.rowsQty * this.columnsQty) return;
+
         numbers.forEach(number => {
             let index;
             do {
@@ -89,19 +91,46 @@ export default class Table {
         this.generatorValues.removeNumbers();
     }
 
-    _sumValues() {
-
+    moveCellsInUp() {
+        console.log('ячейки сдвинулись вверх');
+        const newValue = this.generatorValues.generateNumbersForCell(this.cellsValues);
+        this._setValueInCells(newValue);
+        TableRender.displayTableNumbers(this.cells, this.cellsValues);
     }
 
-    _displayNumbers() {
-        Array.from(this.cells).map((cell, index) => {
-            if (this.cellsValues.has(index)) {
-                cell.textContent = this.cellsValues.get(index);
+    moveCellsInDown() {
+        console.log('ячейки сдвинулись вниз');
+        const newValue = this.generatorValues.generateNumbersForCell(this.cellsValues);
+        this._setValueInCells(newValue);
+        TableRender.displayTableNumbers(this.cells, this.cellsValues);
+    }
+
+    moveCellsInLeft() {
+        console.log('ячейки сдвинулись влево');
+        /*
+        Array.from(this.cellsValues).map(cellValue => {
+            for (let i = 0; i < this.rowsQty; i++) {
+
             }
-        })
+            /*let rowIndex;
+            do {
+                rowIndex = cellValue / this.rowsQty;
+            }
+            while (rowIndex > 1) {
+
+            }
+            console.log(cellValue);
+        })*/
+
+        /*const newValue = this.generatorValues.generateNumbersForCell(this.cellsValues);
+        this._setValueInCells(newValue);
+        TableRender.displayTableNumbers(this.cells, this.cellsValues);*/
     }
 
-    _changeTable(){
-        console.log('table is updated');
+    moveCellsInRight() {
+        console.log('ячейки сдвинулись вправо');
+        const newValue = this.generatorValues.generateNumbersForCell(this.cellsValues);
+        this._setValueInCells(newValue);
+        TableRender.displayTableNumbers(this.cells, this.cellsValues);
     }
 };

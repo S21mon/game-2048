@@ -1,9 +1,12 @@
+import EventsHandler from './eventsHandler.js';
+import CONFIG from './config.js';
+
 export default class Game {
-    constructor() {
-        this.isActive = false;
+    constructor(gameState) {
+        this.isActive = gameState;
     }
 
-    get isActive(){
+    get isActive() {
         return this._isActive;
     }
 
@@ -11,9 +14,9 @@ export default class Game {
         this._isActive = state;
     }
 
-    startGame() {
+    startNewGame() {
         console.log('game started');
-        this._isActive = !this.isActive;
+        this.isActive = CONFIG.GAME_IS_ACTIVE;
     }
 
     finishGame() {
