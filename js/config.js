@@ -12,6 +12,16 @@ const CONFIG = {
     ARROW_DOWN: 'ArrowDown',
     ARROW_LEFT: 'ArrowLeft',
     ARROW_RIGHT: 'ArrowRight',
+    ASCENDING_SORT: 'ASCENDING_SORT',
+    DESCENDING_SORT: 'DESCENDING_SORT',
+    MODAL_ACTIVE_CLASS: 'modal_active',
+    OVERLAY_CLASS: 'overlay',
+    VISIBILITY_HIDDEN_CLASS: 'visibility-hidden',
+    TABLE_BUTTON: document.querySelector('[data-accessory="table"]'),
+    MODAL: document.querySelector('.modal'),
+    STORAGE_KEY_RECORD_DEGREE: 'record-degree',
+    RECORD_DEGREE: document.querySelector('[data-record]'),
+    STORAGE_KEY_CELLS_VALUES: 'cells-values',
 };
 
 export default CONFIG;

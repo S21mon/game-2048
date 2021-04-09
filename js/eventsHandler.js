@@ -1,7 +1,11 @@
 import CONFIG from './config.js';
+import Table from './table.js';
+import Game from './game.js';
+import Json from './json.js';
+import Storage from './storage.js';
 
 export default class EventsHandler {
-    handleKeyEvent(event, table) {
+    static handleKeyEvent(event) {
         const key = event.code;
 
         if (key === CONFIG.ARROW_UP ||
@@ -10,6 +14,7 @@ export default class EventsHandler {
             key === CONFIG.ARROW_RIGHT) {
 
             event.preventDefault();
+            const table = new Table();
 
             switch (key) {
                 case `${CONFIG.ARROW_UP}`:
@@ -31,11 +36,28 @@ export default class EventsHandler {
         }
     }
 
-    handleClickEvent(event, game) {
-        game.startNewGame();
+    static handleClickEvent(event) {
+        if (event.target.closest('[data-functionality="start-game"]')) {
+            const game = new Game();
+            game.startNewGame();
+        }
     }
 
-    handleLoadEvent(event, table) {
+    static handleLoadEvent(event) {
+        const table = new Table();
         table.initTable();
+    }
+
+    static handleBeforeUnload(event) {
+        const table = new Table();
+        const dataInJson = [];
+        Array.from(table.cellsValues).forEach(cell => {
+            const cellData = {
+                'cellIndex': cell[0],
+                'cellValue': cell[1],
+            };
+            dataInJson.push(Json.convertToJson(cellData));
+        })
+        Storage.setData(CONFIG.STORAGE_KEY_CELLS_VALUES, '[' + dataInJson + ']');
     }
 }

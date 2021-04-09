@@ -1,19 +1,19 @@
 import Table from './table.js';
 import Game from './game.js';
-import CONFIG from './config.js';
 import EventsHandler from './eventsHandler.js';
+import Storage from './storage.js';
+import CONFIG from './config.js';
 
-const startGameButton = document.querySelector('[data-functionality="start-game"]');
-const game = new Game(CONFIG.GAME_IS_ACTIVE);
-const table = new Table(CONFIG.ROWS_TABLE_QTY, CONFIG.COLUMNS_TABLE_QTY);
-const eventsHandler = new EventsHandler();
+const game = new Game();
+const table = new Table();
 
-startGameButton.addEventListener('click', function(event) {
-    eventsHandler.handleClickEvent(event, game);
-});
-window.addEventListener('load', function(event) {
-    eventsHandler.handleLoadEvent(event, table)
-});
-document.addEventListener('keydown', function(event) {
-    eventsHandler.handleKeyEvent(event, table)
-});
+const recordDegree = Storage.getData(CONFIG.STORAGE_KEY_RECORD_DEGREE);
+if (recordDegree) {
+    CONFIG.RECORD_DEGREE.dataset.record = recordDegree;
+    CONFIG.RECORD_DEGREE.textContent = recordDegree;
+}
+
+document.addEventListener('click', EventsHandler.handleClickEvent);
+window.addEventListener('load', EventsHandler.handleLoadEvent);
+document.addEventListener('keydown', EventsHandler.handleKeyEvent);
+window.addEventListener('beforeunload', EventsHandler.handleBeforeUnload);
