@@ -1,9 +1,9 @@
-import CONFIG from './config.js';
+import CONFIG from '../config/config.js';
 import Numbers from './numbers.js';
-import TableRender from './tableRender.js';
+import ElementsRender from './elementsRender.js';
 import Game from './game.js';
-import Storage from './storage.js';
-import Json from './json.js';
+import Storage from '../storage/storage.js';
+import Json from '../storage/json.js';
 
 export default class Table {
     static instance;
@@ -70,7 +70,7 @@ export default class Table {
             this._setValueInCells(startedValues);
         }
 
-        TableRender.displayTableNumbers(this.cells, this.cellsValues);
+        ElementsRender.displayTableNumbers(this.cells, this.cellsValues);
         const game = new Game();
         game.isActive = true;
     }
@@ -134,7 +134,7 @@ export default class Table {
         }
 
         this._checkForCellMovement(isChangedTable);
-        TableRender.displayTableNumbers(this.cells, this.cellsValues);
+        ElementsRender.displayTableNumbers(this.cells, this.cellsValues);
     }
 
     moveCellsInDown() {
@@ -150,7 +150,7 @@ export default class Table {
         }
 
         this._checkForCellMovement(isChangedTable);
-        TableRender.displayTableNumbers(this.cells, this.cellsValues);
+        ElementsRender.displayTableNumbers(this.cells, this.cellsValues);
     }
 
     moveCellsInRight() {
@@ -167,7 +167,7 @@ export default class Table {
         }
 
         this._checkForCellMovement(isChangedTable);
-        TableRender.displayTableNumbers(this.cells, this.cellsValues);
+        ElementsRender.displayTableNumbers(this.cells, this.cellsValues);
     }
 
     moveCellsInLeft() {
@@ -184,14 +184,25 @@ export default class Table {
         }
 
         this._checkForCellMovement(isChangedTable);
-        TableRender.displayTableNumbers(this.cells, this.cellsValues);
+        ElementsRender.displayTableNumbers(this.cells, this.cellsValues);
     }
 
     _checkForCellMovement(isChangedTable) {
-        if (!isChangedTable && this._endOfMoveCheck()) {
+        const game = new Game();
+        if (!isChangedTable) {
+            return;
+        }
+
+        if (game.checkForWin(this.cellsValues.values())) {
+            game.isWonGame = true;
             this._prohibitCellFilling();
-        } else if (isChangedTable) {
-            this._fillNewCell();
+        }
+
+        this._fillNewCell();
+
+        if (!game.checkForLoss(this.cellsValues) && this._checkFullnessOfAllCells()) {
+            game.isWonGame = false;
+            this._prohibitCellFilling();
         }
     }
 
@@ -201,16 +212,8 @@ export default class Table {
     }
 
     _prohibitCellFilling() {
-        const recordValue = Numbers.getMaxValue(Array.from(this.cellsValues.values()));
-        const recordDegree = Numbers.getNumberDegree(recordValue, CONFIG.STARTED_VALUE);
-
-        if (Storage.getData(CONFIG.STORAGE_KEY_RECORD_DEGREE) < recordDegree) {
-            Storage.setData(CONFIG.STORAGE_KEY_RECORD_DEGREE, recordDegree);
-            CONFIG.RECORD_DEGREE.textContent = recordDegree;
-            CONFIG.RECORD_DEGREE.dataset.record = recordDegree;
-        }
-
         const game = new Game();
+        game.setRecord(this.cellsValues.values());
         game.finishGame();
     }
 
@@ -238,7 +241,7 @@ export default class Table {
 
         const startedValues = Numbers.generateNumbersForCell(this.cellsValues);
         this._setValueInCells(startedValues);
-        TableRender.displayTableNumbers(this.cells, this.cellsValues);
+        ElementsRender.displayTableNumbers(this.cells, this.cellsValues);
     }
 
     _clearTable() {
@@ -250,7 +253,7 @@ export default class Table {
         })
     }
 
-    _endOfMoveCheck() {
+    _checkFullnessOfAllCells() {
         return this.cellsValues.size === this.rowsQty * this.columnsQty;
     }
 };

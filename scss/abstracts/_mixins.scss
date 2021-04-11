@@ -13,6 +13,10 @@
   align-items: $align-items;
 }
 
+@mixin animation($animation-name, $animation-duration, $animation-timing-function) {
+  animation: $animation-name $animation-duration $animation-timing-function;
+}
+
 @mixin media-query($breakpoint) {
   @if $breakpoint == tablet {
     @media only screen and (max-width: $tablet-breakpoint) {

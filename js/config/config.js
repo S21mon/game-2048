@@ -7,7 +7,6 @@ const CONFIG = {
     GAME_TABLE_BODY_CLASSES: ['game-table__body', 'section-game__game-table-body'],
     GAME_TABLE_ROW_CLASSES: ['game-table__row'],
     GAME_TABLE_CELL_CLASSES: ['game-table__cell', 'section-game__game-table-cell'],
-    GAME_IS_ACTIVE: true,
     ARROW_UP: 'ArrowUp',
     ARROW_DOWN: 'ArrowDown',
     ARROW_LEFT: 'ArrowLeft',
@@ -22,6 +21,10 @@ const CONFIG = {
     STORAGE_KEY_RECORD_DEGREE: 'record-degree',
     RECORD_DEGREE: document.querySelector('[data-record]'),
     STORAGE_KEY_CELLS_VALUES: 'cells-values',
+    GAME_LOSE_MESSAGE: 'The game is lost',
+    GAME_WON_MESSAGE: 'The game is won',
+    GAME_TABLE_CELL_VALUE_CLASS: 'game-table__cell_value_',
+    WINNING_NUMBER: 2048,
 };
 
 export default CONFIG;

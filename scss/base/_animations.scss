@@ -1,0 +1,29 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes moveInDown {
+  0% {
+    opacity: 0;
+
+    transform: translateY(-25px);
+  }
+
+  60% {
+    opacity: .5;
+
+    transform: translateY(10px);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}

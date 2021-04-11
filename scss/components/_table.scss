@@ -1,4 +1,6 @@
 .game-table {
+  @include animation(fadeIn, 1s ,ease-in-out);
+
   border-collapse: collapse;
 
   &__cell {
@@ -7,7 +9,47 @@
                   $cell-line-height,
                   $brown-color);
 
-    border: 3px solid $dark-amber-color;
+    border: 3px solid $brown-color;
+
+    transition: .5s all;
+
+    &_value_2 {
+      background-color: $cell-value-2-color;
+    }
+
+    &_value_4 {
+      background-color: $cell-value-4-color;
+    }
+
+    &_value_8 {
+      background-color: $cell-value-8-color;
+    }
+
+    &_value_16 {
+      background-color: $cell-value-16-color;
+    }
+
+    &_value_32 {
+      background-color: $cell-value-32-color;
+    }
+
+    &_value_64 {
+      background-color: $cell-value-64-color;
+    }
+
+    &_value_128 {
+      background-color: $cell-value-128-color;
+    }
+
+    &_value_256,
+    &_value_512,
+    &_value_1024 {
+      background-color: $cell-value-256-color;
+    }
+
+    &_value_2048 {
+      background-color: $cell-value-2048-color;
+    }
 
     @include media-query(phone-md) {
       font-size: $cell-font-size-sm;

@@ -1,13 +1,16 @@
 .btn {
+  @include animation(moveInDown, 1s, ease-in-out);
+
   display: block;
   padding: 1rem 2rem;
-  border: 1.5px solid currentColor;
 
   color: $apricot-kraiola-color;
   background-color: $brown-color;
 
+  transition: .2s all;
+
   &:hover {
-    border-color: $brown-color;
+    border: 1.5px solid $brown-color;
 
     color: $dark-amber-color;
     background-color: $apricot-kraiola-color;

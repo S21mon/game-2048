@@ -1,4 +1,4 @@
-import CONFIG from './config.js';
+import CONFIG from '../config/config.js';
 
 export default class Numbers {
     static generateNumbersForCell(cellsValues) {
@@ -44,5 +44,9 @@ export default class Numbers {
             degree++;
         }
         return degree;
+    }
+
+    static checkMultiplicity(dividend, number) {
+        return dividend % number === 0;
     }
 }

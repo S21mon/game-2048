@@ -1,10 +1,18 @@
-import CONFIG from './config.js';
+import CONFIG from '../config/config.js';
 import Table from './table.js';
 import Game from './game.js';
-import Json from './json.js';
-import Storage from './storage.js';
+import Json from '../storage/json.js';
+import Storage from '../storage/storage.js';
 
 export default class EventsHandler {
+    static addHandler(element, eventType, func) {
+        element.addEventListener(eventType, func);
+    }
+
+    static removeHandler(element, eventType, func) {
+        element.removeEventListener(eventType, func);
+    }
+
     static handleKeyEvent(event) {
         const key = event.code;
 

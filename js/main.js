@@ -1,8 +1,8 @@
-import Table from './table.js';
-import Game from './game.js';
-import EventsHandler from './eventsHandler.js';
-import Storage from './storage.js';
-import CONFIG from './config.js';
+import Table from './game/table.js';
+import Game from './game/game.js';
+import EventsHandler from './game/eventsHandler.js';
+import Storage from './storage/storage.js';
+import CONFIG from './config/config.js';
 
 const game = new Game();
 const table = new Table();
@@ -13,7 +13,7 @@ if (recordDegree) {
     CONFIG.RECORD_DEGREE.textContent = recordDegree;
 }
 
-document.addEventListener('click', EventsHandler.handleClickEvent);
-window.addEventListener('load', EventsHandler.handleLoadEvent);
-document.addEventListener('keydown', EventsHandler.handleKeyEvent);
-window.addEventListener('beforeunload', EventsHandler.handleBeforeUnload);
+EventsHandler.addHandler(document, 'click', EventsHandler.handleClickEvent);
+EventsHandler.addHandler(window, 'load', EventsHandler.handleLoadEvent);
+EventsHandler.addHandler(document, 'keydown', EventsHandler.handleKeyEvent);
+EventsHandler.addHandler(window, 'beforeunload', EventsHandler.handleBeforeUnload);
