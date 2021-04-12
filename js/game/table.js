@@ -71,8 +71,6 @@ export default class Table {
         }
 
         ElementsRender.displayTableNumbers(this.cells, this.cellsValues);
-        const game = new Game();
-        game.isActive = true;
     }
 
     _setCellsValuesFromStorage(savedValues) {
@@ -127,8 +125,8 @@ export default class Table {
         for (let index of sortedCellsIndices) {
             const numberRow = Math.floor(index / this.rowsQty);
             const border = index - numberRow * this.rowsQty;
-            for (let currentIndex = index; currentIndex > border; currentIndex = currentIndex - 4) {
-                let newIndex = currentIndex - 4;
+            for (let currentIndex = index; currentIndex > border; currentIndex = currentIndex - CONFIG.ROWS_TABLE_QTY) {
+                let newIndex = currentIndex - CONFIG.ROWS_TABLE_QTY;
                 isChangedTable = this._moveCell(newIndex, currentIndex, isChangedTable);
             }
         }
@@ -143,8 +141,8 @@ export default class Table {
 
         for (let index of sortedCellsIndices) {
             const numberRow = Math.floor(index / this.rowsQty);
-            for (let currentIndex = index; currentIndex < index + (this.rowsQty - numberRow - 1) * this.rowsQty; currentIndex = currentIndex + 4) {
-                let newIndex = currentIndex + 4;
+            for (let currentIndex = index; currentIndex < index + (this.rowsQty - numberRow - 1) * this.rowsQty; currentIndex = currentIndex + CONFIG.ROWS_TABLE_QTY) {
+                let newIndex = currentIndex + CONFIG.ROWS_TABLE_QTY;
                 isChangedTable = this._moveCell(newIndex, currentIndex, isChangedTable);
             }
         }

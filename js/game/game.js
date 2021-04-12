@@ -46,10 +46,10 @@ export default class Game {
         const matchingValues = sortedIndices.filter((item, index, array) => {
             const nextCellValueOfRow = !Numbers.checkMultiplicity(index + 1, CONFIG.ROWS_TABLE_QTY) ?
                 values.get(array[index + 1]) : 0;
-            const nextCellValueOfColumn = values.get(array[index + 4]);
+            const nextCellValueOfColumn = values.get(array[index + CONFIG.ROWS_TABLE_QTY]);
             const prevCellValueOfRow = !Numbers.checkMultiplicity(index, CONFIG.ROWS_TABLE_QTY) ?
                 values.get(array[index - 1]) : 0;
-            const prevCellValueOfColumn = values.get(array[index - 4]);
+            const prevCellValueOfColumn = values.get(array[index - CONFIG.ROWS_TABLE_QTY]);
             const currentCellValue = values.get(item);
 
             if (nextCellValueOfRow === currentCellValue || nextCellValueOfColumn === currentCellValue ||
